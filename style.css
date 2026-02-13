@@ -1,0 +1,85 @@
+:root {
+    --gold: #ffd700;
+    --cyan: #00ffff;
+    --bg: #020202;
+    --cream: #f5f5dc;
+    --spark: rgba(0, 255, 255, 0.4);
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--cream);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0; padding: 0;
+    overflow-x: hidden;
+    /* Neural Grid Background */
+    background-image: 
+        radial-gradient(circle at 50% 50%, #111 0%, #000 100%),
+        linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 100% 100%, 30px 30px, 30px 30px;
+}
+
+/* Background Spark Animation */
+#canvas-sparks {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+}
+
+header {
+    height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    border-bottom: 2px solid var(--gold);
+    background: transparent;
+}
+
+h1 {
+    font-size: clamp(3rem, 10vw, 6rem);
+    color: var(--gold);
+    letter-spacing: 15px;
+    text-shadow: 0 0 20px var(--gold);
+    animation: brainPulse 3s infinite alternate;
+}
+
+@keyframes brainPulse {
+    0% { transform: scale(1); text-shadow: 0 0 10px var(--gold); }
+    100% { transform: scale(1.05); text-shadow: 0 0 30px var(--cyan), 0 0 50px var(--gold); }
+}
+
+.content-box {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    margin-bottom: 50px;
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease-out;
+}
+
+.content-box.reveal { opacity: 1; transform: translateY(0); }
+
+/* Glowing Spark Effect for Cards */
+.logic-card {
+    border-left: 5px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+}
+
+.logic-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+    animation: flow 3s infinite;
+}
+
+@keyframes flow {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
